@@ -64,6 +64,8 @@ if dein#load_state('~/.local/share/dein')
 
     call dein#add('chentau/marks.nvim')
 
+    call dein#add('vim-test/vim-test')
+
     call dein#end()
     call dein#save_state()
 endif
@@ -221,4 +223,9 @@ let g:indent_blankline_show_current_context = v:true
 
 set backupcopy=yes
 
-nnoremap Y yy
+let g:test#neovim#start_normal = 1
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
