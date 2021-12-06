@@ -12,57 +12,39 @@ if dein#load_state('~/.local/share/dein')
     call dein#add('markonm/traces.vim')
     call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
     call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-
     call dein#add('tpope/vim-fugitive')
     call dein#add('airblade/vim-gitgutter')
-
     call dein#add('vim-airline/vim-airline')
     call dein#add('myusuf3/numbers.vim')
     call dein#add('scrooloose/nerdcommenter')
     call dein#add('machakann/vim-sandwich')
-
     call dein#add('pangloss/vim-javascript')
     call dein#add('HerringtonDarkholme/yats.vim')
     call dein#add('peitalin/vim-jsx-typescript')
     call dein#add('evanleck/vim-svelte')
-
     call dein#add('mbbill/undotree')
-
-    "bclose is dep of ranger
-    "call dein#add('rbgrouleff/bclose.vim')
-    "call dein#add('francoiscabrol/ranger.vim')
-    call dein#add('kevinhwang91/rnvimr')
-
     call dein#add('mhinz/vim-startify')
     call dein#add('nvim-treesitter/nvim-treesitter')
     call dein#add('neovim/nvim-lspconfig')
     call dein#add('glepnir/lspsaga.nvim')
-
     call dein#add('hrsh7th/vim-vsnip')
-
     call dein#add('hrsh7th/nvim-cmp')
     call dein#add('hrsh7th/cmp-nvim-lsp', {'depends': 'nvim-cmp'})
     call dein#add('hrsh7th/cmp-buffer', {'depends': 'nvim-cmp'})
     call dein#add('hrsh7th/cmp-vsnip', {'depends': 'nvim-cmp'})
     call dein#add('hrsh7th/cmp-path', {'depends': 'nvim-cmp'})
-
     call dein#add('kyazdani42/nvim-web-devicons')
     call dein#add('romgrk/barbar.nvim')
-
     call dein#add('folke/which-key.nvim')
-
     call dein#add('akinsho/nvim-toggleterm.lua')
-
     call dein#add('EdenEast/nightfox.nvim')
     call dein#add('rmehri01/onenord.nvim')
     call dein#add('cocopon/iceberg.vim')
     call dein#add('dracula/vim')
-
     call dein#add('folke/trouble.nvim')
-
     call dein#add('chentau/marks.nvim')
-
     call dein#add('vim-test/vim-test')
+    call dein#add('is0n/fm-nvim')
 
     call dein#end()
     call dein#save_state()
@@ -131,18 +113,7 @@ nmap ,ct :let @+=expand("%:t")<CR>
 set hidden
 set number
 
-" Ranger
-:nnoremap <Leader>r :RnvimrToggle<cr>
-let g:rnvimr_enable_picker = 1
-let g:rnvimr_layout = {
-    \ 'relative': 'editor',
-    \ 'width': &columns,
-    \ 'height': &lines - 2,
-    \ 'col': 0,
-    \ 'row': 0,
-    \ 'style': 'minimal'
-    \ }
-let g:rnvimr_presets = [{}]
+:nnoremap <Leader>r :Ranger "%:h"<cr>
 
 " Search filenames
 :nnoremap <Leader>ff :FZF<cr>
@@ -215,6 +186,10 @@ lua << EOF
     -- fox = "nordfox",
   })
   nightfox.load()
+
+  require('fm-nvim').setup{
+	border = 'single',
+  }
 
   -- local saga = require 'lspsaga'
   -- saga.init_lsp_saga()
