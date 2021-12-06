@@ -49,8 +49,6 @@ if dein#load_state('~/.local/share/dein')
     call dein#add('kyazdani42/nvim-web-devicons')
     call dein#add('romgrk/barbar.nvim')
 
-    call dein#add('lukas-reineke/indent-blankline.nvim', { 'rev': 'lua'})
-
     call dein#add('folke/which-key.nvim')
 
     call dein#add('akinsho/nvim-toggleterm.lua')
@@ -194,9 +192,18 @@ lua << EOF
 
   -- treesitter
   require'nvim-treesitter.configs'.setup {
-    highlight = {
-      enable = true,
-    },
+      highlight = {
+        enable = true,
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = '<CR>',
+          scope_incremental = '<CR>',
+          node_incremental = '<TAB>',
+          node_decremental = '<S-TAB>',
+        },
+      },
   };
 
   -- marks.nvim
@@ -218,9 +225,6 @@ hi LspDiagnosticsUnderlineError ctermbg=95 ctermfg=252 gui=undercurl guifg=NONE 
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-
-let g:indent_blankline_show_current_context = v:true
-
 set backupcopy=yes
 
 let g:test#neovim#start_normal = 1
