@@ -115,20 +115,6 @@ set number
 
 :nnoremap <Leader>r :Ranger "%:h"<cr>
 
-" Search filenames
-:nnoremap <Leader>ff :FZF<cr>
-:nnoremap <Leader>fg :GFiles<cr>
-" Ripgrep 
-:nnoremap <Leader>fr :Rg<cr>
-" Ripgrep word under cursor
-:nnoremap <Leader>fs :Rg <C-r><C-w><cr>
-" Search open buffers content
-:nnoremap <Leader>fl :Lines<cr>
-" Search open buffers names
-:nnoremap <Leader>fb :Buffers<cr>
-" Search history of opened files
-:nnoremap <Leader>fh :History<cr>
-
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.js, set filetype=typescriptreact
 autocmd BufNewFile,BufRead *.ts,*.tsx,*.js,*.jsx set suffixesadd=.js,.jsx,.ts,.tsx
 
@@ -160,6 +146,7 @@ lua << EOF
   require('cmp-setup')
   require('lsp')
   require('toggle-term')
+  require('fzf')
 
   -- treesitter
   require'nvim-treesitter.configs'.setup {
@@ -190,6 +177,8 @@ lua << EOF
   require('fm-nvim').setup{
 	border = 'single',
   }
+
+  require("which-key").setup {}
 
   -- local saga = require 'lspsaga'
   -- saga.init_lsp_saga()
