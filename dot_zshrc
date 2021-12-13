@@ -97,6 +97,8 @@ export EDITOR=nvim
 
 export PATH="$HOME/go/bin:$PATH"
 
+# Stack stuff
+export PATH="$HOME/.local/bin:$PATH"
 
 bindkey -e
 bindkey "\e[3~" delete-char
