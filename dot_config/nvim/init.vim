@@ -34,6 +34,7 @@ if dein#load_state('~/.local/share/dein')
     call dein#add('hrsh7th/cmp-vsnip', {'depends': 'nvim-cmp'})
     call dein#add('hrsh7th/cmp-path', {'depends': 'nvim-cmp'})
     call dein#add('kyazdani42/nvim-web-devicons')
+    call dein#add('kyazdani42/nvim-tree.lua')
     call dein#add('romgrk/barbar.nvim')
     call dein#add('folke/which-key.nvim')
     call dein#add('akinsho/nvim-toggleterm.lua')
@@ -45,6 +46,8 @@ if dein#load_state('~/.local/share/dein')
     call dein#add('chentau/marks.nvim')
     call dein#add('vim-test/vim-test')
     call dein#add('is0n/fm-nvim')
+    call dein#add('posva/vim-vue')
+    call dein#add('kevinhwang91/nvim-bqf')
 
     call dein#end()
     call dein#save_state()
@@ -179,6 +182,8 @@ lua << EOF
   }
 
   require("which-key").setup {}
+
+  require'nvim-tree'.setup {}
 
   -- local saga = require 'lspsaga'
   -- saga.init_lsp_saga()
