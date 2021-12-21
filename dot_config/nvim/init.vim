@@ -90,11 +90,6 @@ nnoremap <leader><space> :noh<cr>
 nnoremap ]q :cnext<cr>
 nnoremap [q :cprev<cr>
 
-"Buffers
-nnoremap <M-]> :BufferNext<cr>
-nnoremap <M-[> :BufferPrevious<cr>
-nnoremap <M-p> :BufferPick<cr>
-
 " colors
 set termguicolors
 "colorscheme iceberg
@@ -163,6 +158,7 @@ lua << EOF
   require('lsp')
   require('toggle-term')
   require('fzf')
+  require('barbar')
 
   -- treesitter
   require'nvim-treesitter.configs'.setup {
