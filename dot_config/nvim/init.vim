@@ -197,6 +197,7 @@ lua << EOF
   require("which-key").setup {}
 
   require'nvim-tree'.setup {}
+  require'lualine'.setup {}
 
   -- local saga = require 'lspsaga'
   -- saga.init_lsp_saga()
