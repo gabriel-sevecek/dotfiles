@@ -9,9 +9,12 @@ wk.register({
   b = {
     name = "Buffers",
     p = { "<cmd>BufferPick<CR>", "Pick buffer" },
-    cc = { "<cmd>BufferClose<CR>", "Close current buffer" },
-    co = { "<cmd>BufferCloseAllButCurrent<CR>", "Close other buffers"},
-    cl = { "<cmd>BufferCloseBuffersLeft<CR>", "Close buffers to the left"},
-    cr = { "<cmd>BufferCloseBuffersRight<CR>", "Close buffers to the right"},
+    c = {
+        name = "Close",
+        c = { "<cmd>BufferClose<CR>", "Close current buffer" },
+        o = { "<cmd>BufferCloseAllButCurrent<CR>", "Close other buffers"},
+        l = { "<cmd>BufferCloseBuffersLeft<CR>", "Close buffers to the left"},
+        r = { "<cmd>BufferCloseBuffersRight<CR>", "Close buffers to the right"},
+    },
   }
 }, { prefix = "<leader>" })
