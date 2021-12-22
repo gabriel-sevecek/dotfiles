@@ -159,6 +159,7 @@ lua << EOF
   require('toggle-term')
   require('fzf')
   require('barbar')
+  require('tree')
 
   -- treesitter
   require'nvim-treesitter.configs'.setup {
@@ -192,7 +193,6 @@ lua << EOF
 
   require("which-key").setup {}
 
-  require'nvim-tree'.setup {}
   require'lualine'.setup {}
 
   -- local saga = require 'lspsaga'
