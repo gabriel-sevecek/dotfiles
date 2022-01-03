@@ -188,7 +188,11 @@ lua << EOF
   nightfox.load()
 
   require('fm-nvim').setup{
-	border = 'single',
+    ui = {
+        float = {
+            border = 'single',
+        },
+    },
   }
 
   require("which-key").setup {}
