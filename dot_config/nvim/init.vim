@@ -197,7 +197,11 @@ lua << EOF
 
   require("which-key").setup {}
 
-  require'lualine'.setup {}
+  require'lualine'.setup {
+      sections = {
+          lualine_c = {{'filename', path = 1}},
+      }
+  }
 
   -- local saga = require 'lspsaga'
   -- saga.init_lsp_saga()
