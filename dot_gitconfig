@@ -21,6 +21,7 @@
     co = commit
     c = checkout
     sw = switch
+    b = branch
 [push]
 	default = simple
 [pull]
