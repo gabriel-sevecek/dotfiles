@@ -96,6 +96,7 @@ set termguicolors
 " colorscheme nord
 "colorscheme onenord
 "colorscheme dracula
+colorscheme nightfox
 
 " Remove scrollbars
 :set guioptions-=r
@@ -179,13 +180,6 @@ lua << EOF
 
   -- marks.nvim
   require'marks'.setup {}
-
-  -- nightfox colorscheme
-  local nightfox = require('nightfox')
-  nightfox.setup({
-    -- fox = "nordfox",
-  })
-  nightfox.load()
 
   require('fm-nvim').setup{
     ui = {
