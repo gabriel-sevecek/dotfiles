@@ -134,7 +134,10 @@ if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile
 eval "$(direnv hook zsh)"
 
 # Following line fixes locale warnings in nix bash
-export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+if [ -e /usr/lib/locale/locale-archive ]; then
+    export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+fi
+
 [ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 [ -f ~/.ghcup/env ] && source ~/.ghcup/env # ghcup-env
 
