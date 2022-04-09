@@ -41,8 +41,6 @@ alias grg='rg -g "*.graphql"'
 alias trg='rg -g "*.tsx" -g "*.ts"'
 alias hrg='rg -g "*.html"'
 alias prg='rg -g "*.py"'
-alias web3="docker exec -it `docker ps | grep dev_web3 | awk '{print $1}'` bash -c 'DJANGO_SETTINGS_MODULE=web3.settings_docker /data/prod/web3/manage.py shell'"
-alias web2="docker exec -it `docker ps | grep -w dev_web | awk '{print $1}'` bash -c 'DJANGO_SETTINGS_MODULE=settings_docker /data/prod/web/manage.py shell'"
 alias hs='fc -l 0 | grep'
 alias end='timew stop && xss-lock -l xsecurelock & sudo systemctl suspend'
 alias bat='bat --theme Nord'
