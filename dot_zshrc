@@ -82,10 +82,13 @@ zinit snippet OMZ::plugins/docker/_docker
 zinit ice as"completion"
 zinit snippet https://git.zx2c4.com/password-store/plain/src/completion/pass.zsh-completion
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+PYENV_ROOT="$HOME/.pyenv"
+if [ -d "$PYENV_ROOT" ]; then
+    export PYENV_ROOT
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+fi
 
 export WORKON_HOME=~/.virtualenvs
 [ -f "/usr/bin/virtualenvwrapper.sh" ] && source /usr/bin/virtualenvwrapper.sh
