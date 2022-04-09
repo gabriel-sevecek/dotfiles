@@ -1,5 +1,8 @@
 -- Setup nvim-cmp.
 local cmp = require'cmp'
+local set = vim.opt
+
+set.completeopt = "menu,menuone,noselect"
 
 cmp.setup({
     snippet = {
