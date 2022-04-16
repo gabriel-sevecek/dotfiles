@@ -43,7 +43,6 @@ addBarIfMultiple x = IfMaxAlt 1 x topBar
         font = "xft:monospace:size=10" -- doesn't matter because of `shrinkText`
 
 myTerm = "kitty"
--- myTerm = "alacritty"
 myLauncher = "rofi -theme ~/.config/rofi/themes/Nord.rasi -matching fuzzy -modi drun,window -show drun -drun-match-fields name,exec"
 myModMask = mod4Mask
 myKeys = 
@@ -72,11 +71,11 @@ _topXmobarPP h = xmobarPP {
     , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]}
 
 main = do
-  _topXmobar <- spawnPipe "xmobar /home/g.sevecek@sportradar.local/.config/xmobar/xmobar.config"
+  _topXmobar <- spawnPipe "xmobar /home/gabriel/.config/xmobar/xmobar.config"
   xmonad $ ewmh $ desktopConfig
     { terminal = myTerm
     , modMask = myModMask
-    --, logHook = dynamicLogWithPP $ _topXmobarPP _topXmobar
+    , logHook = dynamicLogWithPP $ _topXmobarPP _topXmobar
     , layoutHook = desktopLayoutModifiers $ avoidStruts $ noBorders $ (addBarIfMultiple $ ThreeColMid 1 (3/100) (1/2)) ||| (addBarIfMultiple $ defaultTall) ||| (addBarIfMultiple $ Mirror defaultTall) ||| (addBarIfMultiple $ reflectHoriz defaultTall) ||| Full ||| simpleTabbed
     , handleEventHook = docksEventHook <+> fullscreenEventHook <+> handleEventHook desktopConfig
     }
