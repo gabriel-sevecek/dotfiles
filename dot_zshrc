@@ -49,10 +49,11 @@ alias g='git'
 
 # history
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000000
+SAVEHIST=1000000
 setopt appendhistory
 setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
 
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
@@ -147,4 +148,3 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 [ -f ~/.zshrc_work ] && source ~/.zshrc_work
-
