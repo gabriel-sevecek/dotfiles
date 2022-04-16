@@ -77,7 +77,7 @@ function highlight_on_yank()
 end
 vim.api.nvim_create_autocmd("TextYankPost * silent!", { callback = highlight_on_yank })
 
-vim.api.nvim_add_user_command("Format", vim.lsp.buf.formatting, {})
+vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, {})
 vim.api.nvim_set_keymap("n", "]q", ":cnext<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "[q", ":cprev<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader><space>", ":nohl<cr>", { noremap = true, silent = true })
