@@ -27,7 +27,6 @@ require "paq" {
     "folke/which-key.nvim";
     "akinsho/nvim-toggleterm.lua";
     "EdenEast/nightfox.nvim";
-    "rmehri01/onenord.nvim";
     "cocopon/iceberg.vim";
     "dracula/vim";
     "folke/trouble.nvim";
