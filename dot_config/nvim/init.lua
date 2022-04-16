@@ -40,7 +40,7 @@ require "paq" {
 
 local set = vim.opt
 
-set.undodir = "~/.local/share/nvim/undo"
+set.undodir = os.getenv("HOME") .. "/.local/share/nvim/undo"
 set.undofile = true
 set.undolevels = 1000
 
