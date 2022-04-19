@@ -55,6 +55,8 @@ setopt appendhistory
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
 
+zinit light ninrod/pass-zsh-completion
+
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
