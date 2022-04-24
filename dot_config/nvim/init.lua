@@ -36,7 +36,10 @@ require "paq" {
     "posva/vim-vue";
     "kevinhwang91/nvim-bqf";
     "nvim-lualine/lualine.nvim";
+    "lewis6991/impatient.nvim";
 }
+
+require('impatient')
 
 local set = vim.opt
 
