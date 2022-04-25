@@ -1,5 +1,4 @@
 local nvim_lsp = require('lspconfig')
-local lspconfigs = require('lspconfig/configs')
 local wk = require("which-key")
 
 local on_attach = function(client, bufnr)
@@ -37,16 +36,22 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
   if client.name == 'tsserver' then
-      _G.lsp_organize_imports = function()
-          local params = {
+      buf_set_keymap('n', '<leader>lio', function()
+          vim.lsp.buf.execute_command({
               command = "_typescript.organizeImports",
               arguments = {vim.api.nvim_buf_get_name(0)},
               title = ""
-          }
-          vim.lsp.buf.execute_command(params)
-      end
-      vim.cmd("command! LspOrganize lua lsp_organize_imports()")
-      buf_set_keymap('n', '<leader>loi', '<cmd>lua lsp_organize_imports()', opts)
+          })
+      end, opts)
+      wk.register({
+        l = {
+            name = 'LSP',
+            i = {
+                name = 'Imports',
+                o = 'Organize',
+            },
+        },
+      }, { prefix = '<leader>'})
   end
 
   -- Set autocommands conditional on server_capabilities
@@ -83,50 +88,3 @@ for _, lsp in ipairs(servers) do
       init_options = init_options[lsp] or {},
   }
 end
-
-local prettier = {
-    formatCommand = "./node_modules/.bin/prettier",
-}
-
-local black = {
-    formatCommand = "black -",
-    formatStdin = true
-}
-
-local pgformat = {
-    formatCommand = "pg_format --function-case 1 --keyword-case 2 --spaces 2 --no-extra-line",
-}
-
--- local on_efm_attach = function(client)
-    -- if client.resolved_capabilities.document_formatting then
-        -- vim.api.nvim_command [[augroup Format]]
-        -- vim.api.nvim_command [[autocmd! * <buffer>]]
-        -- vim.api.nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
-        -- vim.api.nvim_command [[augroup END]]
-    -- end
--- end
-
-nvim_lsp.efm.setup {
-    on_attach = on_attach,
-    init_options = {documentFormatting = true},
-    -- root_dir = nvim_lsp.util.root_pattern(".git", "package.json", ".vim"),
-    root_dir = function(fname)
-        -- My SQL editing is always from the pg_cli on temp files
-        -- so root dir on those does not really make any sense
-        if fname:sub(-3) == "sql" then
-            return "/tmp";
-        end
-        return nvim_lsp.util.find_git_ancestor(fname)
-    end,
-    settings = {
-        languages = {
-            typescript = {prettier},
-            javascript = {prettier},
-            typescriptreact = {prettier},
-            javascriptreact = {prettier},
-            python = {black},
-            sql = {pgformat},
-        }
-    },
-    filetypes = {"typescript.tsx", "python", "sql"}
-}
