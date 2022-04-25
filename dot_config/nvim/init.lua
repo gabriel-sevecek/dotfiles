@@ -84,6 +84,11 @@ vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, {})
 vim.api.nvim_set_keymap("n", "]q", ":cnext<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "[q", ":cprev<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader><space>", ":nohl<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>s", ":%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>", { noremap = true })
+vim.api.nvim_set_keymap("n", ",cr", ":let @+=expand(\"%:.\")<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", ",ca", ":let @+=expand(\"%:p\")<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", ",cf", ":let @+=expand(\"%:t\")<CR>", { noremap = true })
+
 
 require('ranger-setup')
 require('trouble-setup')
