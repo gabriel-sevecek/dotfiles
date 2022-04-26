@@ -37,6 +37,7 @@ require "paq" {
     "kevinhwang91/nvim-bqf";
     "nvim-lualine/lualine.nvim";
     "lewis6991/impatient.nvim";
+    "jose-elias-alvarez/null-ls.nvim";
 }
 
 require('impatient')
@@ -89,6 +90,13 @@ vim.api.nvim_set_keymap("n", ",cr", ":let @+=expand(\"%:.\")<CR>", { noremap = t
 vim.api.nvim_set_keymap("n", ",ca", ":let @+=expand(\"%:p\")<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", ",cf", ":let @+=expand(\"%:t\")<CR>", { noremap = true })
 
+--require("null-ls").setup({
+    --sources = {
+        --require("null-ls").builtins.formatting.eslint,
+        --require("null-ls").builtins.diagnostics.eslint,
+    --},
+    --root_dir = require("lspconfig.util").root_pattern("tsconfig.eslint.json"),
+--})
 
 require('ranger-setup')
 require('trouble-setup')
