@@ -36,13 +36,13 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
   if client.name == 'tsserver' then
-      buf_set_keymap('n', '<leader>lio', function()
+      vim.keymap.set('n', '<leader>lio', function()
           vim.lsp.buf.execute_command({
               command = "_typescript.organizeImports",
               arguments = {vim.api.nvim_buf_get_name(0)},
               title = ""
           })
-      end, opts)
+      end, { noremap=true, silent=true, buffer=true, })
       wk.register({
         l = {
             name = 'LSP',
