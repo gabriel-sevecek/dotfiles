@@ -93,6 +93,12 @@ vim.api.nvim_set_keymap("n", ",cr", ":let @+=expand(\"%:.\")<CR>", { noremap = t
 vim.api.nvim_set_keymap("n", ",ca", ":let @+=expand(\"%:p\")<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", ",cf", ":let @+=expand(\"%:t\")<CR>", { noremap = true })
 
+require("null-ls").setup({
+    sources = {
+        require("null-ls").builtins.formatting.pg_format,
+    },
+})
+
 local wk = require("which-key")
 
 require("gitsigns").setup{
