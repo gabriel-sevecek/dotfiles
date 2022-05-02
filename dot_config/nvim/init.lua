@@ -38,6 +38,9 @@ require "paq" {
     "nvim-lualine/lualine.nvim";
     "lewis6991/impatient.nvim";
     "jose-elias-alvarez/null-ls.nvim";
+    "L3MON4D3/LuaSnip";
+    "rafamadriz/friendly-snippets";
+    "saadparwaiz1/cmp_luasnip";
 }
 
 require('impatient')
@@ -106,6 +109,7 @@ require('toggle-term')
 require('fzf')
 require('barbar')
 require('tree')
+require('tests')
 require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
@@ -135,3 +139,5 @@ require'lualine'.setup {
         lualine_c = {{'filename', path = 1}},
     }
 }
+require("luasnip.loaders.from_vscode").lazy_load()
+require'luasnip'.filetype_extend("typescript", {"typescript", "javascript"})
