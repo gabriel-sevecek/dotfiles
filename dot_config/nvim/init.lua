@@ -2,7 +2,6 @@ require "paq" {
     { "junegunn/fzf", hook=vim.fn["fzf#install"] };
     "junegunn/fzf.vim";
     "tpope/vim-fugitive";
-    "airblade/vim-gitgutter";
     "myusuf3/numbers.vim";
     "scrooloose/nerdcommenter";
     "machakann/vim-sandwich";
@@ -41,6 +40,7 @@ require "paq" {
     "L3MON4D3/LuaSnip";
     "rafamadriz/friendly-snippets";
     "saadparwaiz1/cmp_luasnip";
+    "lewis6991/gitsigns.nvim";
 }
 
 require('impatient')
@@ -101,6 +101,7 @@ vim.api.nvim_set_keymap("n", ",cf", ":let @+=expand(\"%:t\")<CR>", { noremap = t
     --root_dir = require("lspconfig.util").root_pattern("tsconfig.eslint.json"),
 --})
 
+require('gitsigns').setup()
 require('ranger-setup')
 require('trouble-setup')
 require('cmp-setup')
