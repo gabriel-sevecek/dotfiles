@@ -43,7 +43,7 @@ require "paq" {
     "lewis6991/gitsigns.nvim";
 }
 
-require('impatient')
+require("impatient")
 
 local set = vim.opt
 
@@ -93,52 +93,89 @@ vim.api.nvim_set_keymap("n", ",cr", ":let @+=expand(\"%:.\")<CR>", { noremap = t
 vim.api.nvim_set_keymap("n", ",ca", ":let @+=expand(\"%:p\")<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", ",cf", ":let @+=expand(\"%:t\")<CR>", { noremap = true })
 
---require("null-ls").setup({
-    --sources = {
-        --require("null-ls").builtins.formatting.eslint,
-        --require("null-ls").builtins.diagnostics.eslint,
-    --},
-    --root_dir = require("lspconfig.util").root_pattern("tsconfig.eslint.json"),
---})
+local wk = require("which-key")
 
-require('gitsigns').setup()
-require('ranger-setup')
-require('trouble-setup')
-require('cmp-setup')
-require('lsp')
-require('toggle-term')
-require('fzf')
-require('barbar')
-require('tree')
-require('tests')
-require'nvim-treesitter.configs'.setup {
+require("gitsigns").setup{
+    on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        -- Navigation
+        vim.keymap.set("n", "]c", function()
+            if vim.wo.diff then return "]c" end
+            vim.schedule(function() gs.next_hunk() end)
+            return "<Ignore>"
+        end, {expr=true})
+
+        vim.keymap.set("n", "[c", function()
+            if vim.wo.diff then return "[c" end
+            vim.schedule(function() gs.prev_hunk() end)
+            return "<Ignore>"
+        end, {expr=true})
+
+        wk.register({
+            g = {
+                name = "GitSigns",
+                h = {
+                    name = "Hunk",
+                    s = { ":Gitsigns stage_hunk<CR>", "Stage hunk" },
+                    r = { ":Gitsigns reset_hunk<CR>", "Reset hunk" },
+                    u = { gs.undo_stage_hunk, "Undo stage hunk" },
+                    p = { gs.preview_hunk, "Preview hunk" },
+                    d = { gs.toggle_deleted, "Show old version of hunk" },
+                },
+                S = { gs.stage_buffer, "Stage buffer" },
+                R = { gs.reset_buffer, "Reset buffer" },
+                b = {
+                    name = "Blame",
+                    b = { function() gs.blame_line{full=true} end, "Blame with diff" },
+                    i = { gs.toggle_current_line_blame, "Inline blame" },
+                },
+                d = {
+                    name = "Diff",
+                    i = { gs.diffthis, "Index" },
+                    h = { function() gs.diffthis("~") end, "HEAD" },
+                },
+            }
+        }, { prefix = "<leader>"})
+    end
+}
+require("ranger-setup")
+require("trouble-setup")
+require("cmp-setup")
+require("lsp")
+require("toggle-term")
+require("fzf")
+require("barbar")
+require("tree")
+require("tests")
+require"nvim-treesitter.configs".setup {
     highlight = {
         enable = true,
     },
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = '<CR>',
-            scope_incremental = '<CR>',
-            node_incremental = '<TAB>',
-            node_decremental = '<S-TAB>',
+            init_selection = "<CR>",
+            scope_incremental = "<CR>",
+            node_incremental = "<TAB>",
+            node_decremental = "<S-TAB>",
         },
     },
 };
-require'marks'.setup {}
-require('fm-nvim').setup{
+require"marks".setup {}
+require("fm-nvim").setup{
     ui = {
         float = {
-            border = 'single',
+            border = "single",
         },
     },
 }
 
 require("which-key").setup {}
-require'lualine'.setup {
+require"lualine".setup {
     sections = {
-        lualine_c = {{'filename', path = 1}},
+        lualine_c = {{"filename", path = 1}},
     }
 }
 require("luasnip.loaders.from_vscode").lazy_load()
-require'luasnip'.filetype_extend("typescript", {"typescript", "javascript"})
+require"luasnip".filetype_extend("typescript", {"typescript", "javascript"})
