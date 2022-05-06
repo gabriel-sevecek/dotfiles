@@ -113,28 +113,19 @@ require("gitsigns").setup{
         end, {expr=true})
 
         wk.register({
-            g = {
+            h = {
                 name = "GitSigns",
-                h = {
-                    name = "Hunk",
-                    s = { ":Gitsigns stage_hunk<CR>", "Stage hunk" },
-                    r = { ":Gitsigns reset_hunk<CR>", "Reset hunk" },
-                    u = { gs.undo_stage_hunk, "Undo stage hunk" },
-                    p = { gs.preview_hunk, "Preview hunk" },
-                    d = { gs.toggle_deleted, "Show old version of hunk" },
-                },
+                s = { ":Gitsigns stage_hunk<CR>", "Stage hunk" },
+                r = { ":Gitsigns reset_hunk<CR>", "Reset hunk" },
+                u = { gs.undo_stage_hunk, "Undo stage hunk" },
                 S = { gs.stage_buffer, "Stage buffer" },
                 R = { gs.reset_buffer, "Reset buffer" },
-                b = {
-                    name = "Blame",
-                    b = { function() gs.blame_line{full=true} end, "Blame with diff" },
-                    i = { gs.toggle_current_line_blame, "Inline blame" },
-                },
-                d = {
-                    name = "Diff",
-                    i = { gs.diffthis, "Index" },
-                    h = { function() gs.diffthis("~") end, "HEAD" },
-                },
+                p = { gs.preview_hunk, "Preview hunk" },
+                b = { function() gs.blame_line{full=true} end, "Blame with diff" },
+                t = { gs.toggle_current_line_blame, "Inline blame" },
+                d = { gs.diffthis, "Diff" },
+                D = { function() gs.diffthis("~") end, "Diff agains HEAD" },
+                x = { gs.toggle_deleted, "Show old version of hunk" },
             }
         }, { prefix = "<leader>"})
     end
