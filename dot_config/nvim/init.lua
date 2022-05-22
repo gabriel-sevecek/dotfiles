@@ -29,7 +29,7 @@ require "paq" {
     "cocopon/iceberg.vim";
     "dracula/vim";
     "folke/trouble.nvim";
-    "chentau/marks.nvim";
+    "chentoast/marks.nvim";
     "vim-test/vim-test";
     "is0n/fm-nvim";
     "posva/vim-vue";
