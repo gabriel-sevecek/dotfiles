@@ -4,7 +4,6 @@ import XMonad.Layout.Reflect
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.NoFrillsDecoration
-import XMonad.Layout.IfMaxAlt
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
 import XMonad.Hooks.DynamicLog
@@ -13,34 +12,13 @@ import XMonad.Layout.Gaps
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.SubLayouts
+import XMonad.Layout.WindowNavigation
+import XMonad.Layout.BoringWindows
+import XMonad.Layout.IfMax
 
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
-
-defaultTall = Tall 1 (3/100) (1/2)
-
-addBarIfMultiple x = IfMaxAlt 1 x topBar
-  where
-    topBar = noFrillsDeco shrinkText coolTheme $ mySpacing x
-    coolTheme =
-        def
-            { fontName = font
-            , inactiveBorderColor = grey
-            , inactiveColor = grey
-            , inactiveTextColor = grey
-            , activeBorderColor = blue
-            , activeColor = blue
-            , activeTextColor = blue
-            , urgentTextColor = blue
-            , urgentBorderColor = blue
-            , decoHeight = decorationHeight
-            , decoWidth = 50
-            }
-      where
-        decorationHeight = 4
-        blue = "#84a0c6"
-        grey = "#272935"
-        font = "xft:monospace:size=10" -- doesn't matter because of `shrinkText`
 
 myTerm = "kitty"
 myLauncher = "rofi -theme ~/.config/rofi/themes/Nord.rasi -matching fuzzy -modi drun,window -show drun -drun-match-fields name,exec"
@@ -49,14 +27,31 @@ myKeys =
     [ ((myModMask, xK_p), spawn myLauncher)
     , ((myModMask, xK_Print), spawn "gnome-screenshot --interactive")
     , ((mod1Mask, xK_Tab), windows W.focusDown)
+    , ((myModMask .|. controlMask, xK_h), sendMessage $ pullGroup L)
+    , ((myModMask .|. controlMask, xK_l), sendMessage $ pullGroup R)
+    , ((myModMask .|. controlMask, xK_k), sendMessage $ pullGroup U)
+    , ((myModMask .|. controlMask, xK_j), sendMessage $ pullGroup D)
+    , ((myModMask .|. controlMask, xK_m), withFocused (sendMessage . MergeAll))
+    , ((myModMask .|. controlMask, xK_u), withFocused (sendMessage . UnMerge))
+    , ((myModMask .|. controlMask, xK_period), onGroup W.focusDown')
+    , ((myModMask .|. controlMask, xK_comma), onGroup W.focusUp')
+    , ((myModMask, xK_j), focusDown)
+    , ((myModMask, xK_k), focusUp)
     ]
     -- ++ 
     -- [((m .|. myModMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
         -- -- | (key, sc) <- zip [xK_w, xK_e] [1,0], (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
     -- ]
 
-mySpacing l =
-  spacingRaw True (Border 0 0 0 0) False (Border 5 5 5 5) True l
+myLayout =
+  let
+    tall = Tall 1 (3/100) (1/2)
+    threeColMid = ThreeColMid 1 (3/100) (1/2)
+    horizontall = Mirror tall
+    mirroredTall = reflectHoriz tall
+    modifiers =  desktopLayoutModifiers . smartSpacing 5 . windowNavigation . subTabbed . boringWindows
+  in
+    modifiers $ smartBorders $ threeColMid ||| tall ||| horizontall ||| mirroredTall ||| Full
 
 _topXmobarPP h = xmobarPP {
     ppCurrent = xmobarColor "#e2a478" "" . wrap "[" "]"
@@ -65,18 +60,25 @@ _topXmobarPP h = xmobarPP {
     , ppHiddenNoWindows = xmobarColor "#a093c7" ""
     , ppSep = "<fc=#ffffff> | </fc>" 
     , ppTitle = xmobarColor "#84a0c6" "" . shorten 60
-    , ppLayout = xmobarColor "#e27878" ""
+    -- hack to drop "Spacing Tabbed"
+    , ppLayout = xmobarColor "#e27878" "" . unwords . drop 2 . words
     , ppOutput = hPutStrLn h
     --, ppExtras  = [windowCount]
     , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]}
 
+myFocusedBorderColor = "#7aa2f7"
+myNormalBorderColor = "#1f2335"
+
 main = do
   _topXmobar <- spawnPipe "xmobar /home/gabriel/.config/xmobar/xmobar.config"
-  xmonad $ ewmh $ desktopConfig
+  xmonad $ ewmh . docks . ewmhFullscreen $ desktopConfig
     { terminal = myTerm
     , modMask = myModMask
     , logHook = dynamicLogWithPP $ _topXmobarPP _topXmobar
-    , layoutHook = desktopLayoutModifiers $ avoidStruts $ noBorders $ (addBarIfMultiple $ ThreeColMid 1 (3/100) (1/2)) ||| (addBarIfMultiple $ defaultTall) ||| (addBarIfMultiple $ Mirror defaultTall) ||| (addBarIfMultiple $ reflectHoriz defaultTall) ||| Full ||| simpleTabbed
-    , handleEventHook = docksEventHook <+> fullscreenEventHook <+> handleEventHook desktopConfig
+    , layoutHook = myLayout
+    , handleEventHook = handleEventHook desktopConfig
+    , focusedBorderColor = myFocusedBorderColor
+    , normalBorderColor = myNormalBorderColor
+    , borderWidth = 3
     }
     `additionalKeys` myKeys
