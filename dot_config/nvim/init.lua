@@ -41,6 +41,7 @@ require "paq" {
     "rafamadriz/friendly-snippets";
     "saadparwaiz1/cmp_luasnip";
     "lewis6991/gitsigns.nvim";
+    "rbong/vim-flog";
 }
 
 require("impatient")
