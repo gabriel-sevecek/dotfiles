@@ -13,8 +13,10 @@
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     lgh = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -n 10
     l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -n 10
+    lgm = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     files-commit = diff-tree --no-commit-id --name-status -r
     dc = diff --cached
+    dh = diff HEAD^!
     s = status
     c = commit
 	d = diff
@@ -22,6 +24,8 @@
     c = checkout
     sw = switch
     b = branch
+    p = pull
+    r = rebase
 [push]
 	default = simple
 [pull]
