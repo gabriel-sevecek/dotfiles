@@ -16,9 +16,23 @@ import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowNavigation
 import XMonad.Layout.BoringWindows
 import XMonad.Layout.IfMax
-
+import XMonad.Layout.Simplest
+import XMonad.Actions.Navigation2D
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
+
+myFocusedBorderColor = "#7aa2f7"
+myNormalBorderColor = "#1f2335"
+
+myTabTheme = def
+    --{ fontName              = myFont
+    { activeColor           = myFocusedBorderColor
+    , inactiveColor         = myNormalBorderColor
+    , activeBorderColor     = myFocusedBorderColor
+    , inactiveBorderColor   = myNormalBorderColor
+    , activeTextColor       = myNormalBorderColor
+    , inactiveTextColor     = myFocusedBorderColor
+    }
 
 myTerm = "kitty"
 myLauncher = "rofi -theme ~/.config/rofi/themes/Nord.rasi -matching fuzzy -modi drun,window -show drun -drun-match-fields name,exec"
@@ -37,6 +51,10 @@ myKeys =
     , ((myModMask .|. controlMask, xK_comma), onGroup W.focusUp')
     , ((myModMask, xK_j), focusDown)
     , ((myModMask, xK_k), focusUp)
+    , ((controlMask, xK_h), windowSwap L True)
+    , ((controlMask, xK_j), windowSwap D True)
+    , ((controlMask, xK_k), windowSwap U True)
+    , ((controlMask, xK_l), windowSwap R True)
     ]
     -- ++ 
     -- [((m .|. myModMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
@@ -49,9 +67,9 @@ myLayout =
     threeColMid = ThreeColMid 1 (3/100) (1/2)
     horizontall = Mirror tall
     mirroredTall = reflectHoriz tall
-    modifiers =  desktopLayoutModifiers . smartSpacing 5 . windowNavigation . subTabbed . boringWindows
+    modifiers =  desktopLayoutModifiers . windowNavigation . addTabs shrinkText myTabTheme . subLayout [] Simplest . boringWindows
   in
-    modifiers $ smartBorders $ threeColMid ||| tall ||| horizontall ||| mirroredTall ||| Full
+    modifiers $ smartSpacing 5 . smartBorders $ threeColMid ||| tall ||| horizontall ||| mirroredTall ||| Full
 
 _topXmobarPP h = xmobarPP {
     ppCurrent = xmobarColor "#e2a478" "" . wrap "[" "]"
@@ -65,9 +83,6 @@ _topXmobarPP h = xmobarPP {
     , ppOutput = hPutStrLn h
     --, ppExtras  = [windowCount]
     , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]}
-
-myFocusedBorderColor = "#7aa2f7"
-myNormalBorderColor = "#1f2335"
 
 main = do
   _topXmobar <- spawnPipe "xmobar /home/gabriel/.config/xmobar/xmobar.config"
