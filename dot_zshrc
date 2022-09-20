@@ -46,6 +46,9 @@ alias end='timew stop && xss-lock -l xsecurelock & sudo systemctl suspend'
 alias bat='bat --theme Nord'
 alias d='docker'
 alias g='git'
+alias h='fc -l 1'
+alias timestamp='date +%s%3N'
+alias s="kitty +kitten ssh"
 
 # history
 HISTFILE=~/.zsh_history
