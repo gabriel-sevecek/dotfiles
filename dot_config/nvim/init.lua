@@ -1,12 +1,25 @@
-require "paq" {
-    { "junegunn/fzf", hook=vim.fn["fzf#install"] };
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+    "junegunn/fzf";
     "junegunn/fzf.vim";
     "tpope/vim-fugitive";
     "myusuf3/numbers.vim";
-    "scrooloose/nerdcommenter";
+    "tpope/vim-commentary";
     "machakann/vim-sandwich";
     "pangloss/vim-javascript";
-    "HerringtonDarkholme/yats.vim";
+    "herringtondarkholme/yats.vim";
     "peitalin/vim-jsx-typescript";
     "evanleck/vim-svelte";
     "mbbill/undotree";
@@ -18,11 +31,14 @@ require "paq" {
     "hrsh7th/cmp-nvim-lsp";
     "hrsh7th/cmp-buffer";
     "hrsh7th/cmp-path";
-    "kyazdani42/nvim-web-devicons";
     "nvim-lua/plenary.nvim";
-    "MunifTanjim/nui.nvim";
+    "muniftanjim/nui.nvim";
     "nvim-neo-tree/neo-tree.nvim";
-    "romgrk/barbar.nvim";
+    {'romgrk/barbar.nvim',
+      event = "BufEnter",
+      dependencies = "nvim-tree/nvim-web-devicons",
+      opts = {}
+    };
     "folke/which-key.nvim";
     "akinsho/nvim-toggleterm.lua";
     "EdenEast/nightfox.nvim";
@@ -42,16 +58,15 @@ require "paq" {
     "saadparwaiz1/cmp_luasnip";
     "lewis6991/gitsigns.nvim";
     "rbong/vim-flog";
-}
+    "JoosepAlviste/nvim-ts-context-commentstring";
+    "elihunter173/dirbuf.nvim";
+})
 
 require("impatient")
-
 local set = vim.opt
-
 set.undodir = os.getenv("HOME") .. "/.local/share/nvim/undo"
 set.undofile = true
 set.undolevels = 1000
-
 set.mouse = "a"
 set.tabstop = 4
 set.shiftwidth = 4
@@ -63,31 +78,25 @@ set.smartcase = true
 set.incsearch = true
 set.showmatch = true
 set.hlsearch = true
-
 set.termguicolors = true
 vim.cmd [[
     colorscheme nightfox
 ]]
-
 vim.g.startify_change_to_dir = 0
 vim.g.startify_bookmarks = {{
     i = "~/.config/nvim/init.lua",
     z = "~/.zshrc",
 }}
-
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
-
 vim.g.NERDSpaceDelims = 1
-
 function highlight_on_yank()
     vim.highlight.on_yank { on_visual=false }
 end
 vim.api.nvim_create_autocmd("TextYankPost * silent!", { callback = highlight_on_yank })
-
-vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting_sync, {})
+vim.api.nvim_create_user_command("Format", vim.lsp.buf.format, {})
 vim.api.nvim_set_keymap("n", "]q", ":cnext<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "[q", ":cprev<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader><space>", ":nohl<cr>", { noremap = true, silent = true })
@@ -95,32 +104,26 @@ vim.api.nvim_set_keymap("n", "<Leader>s", ":%s/<C-r><C-w>/<C-r><C-w>/g<Left><Lef
 vim.api.nvim_set_keymap("n", ",cr", ":let @+=expand(\"%:.\")<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", ",ca", ":let @+=expand(\"%:p\")<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", ",cf", ":let @+=expand(\"%:t\")<CR>", { noremap = true })
-
 require("null-ls").setup({
     sources = {
         require("null-ls").builtins.formatting.pg_format,
     },
 })
-
 local wk = require("which-key")
-
 require("gitsigns").setup{
     on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
-
         -- Navigation
         vim.keymap.set("n", "]c", function()
             if vim.wo.diff then return "]c" end
             vim.schedule(function() gs.next_hunk() end)
             return "<Ignore>"
         end, {expr=true})
-
         vim.keymap.set("n", "[c", function()
             if vim.wo.diff then return "[c" end
             vim.schedule(function() gs.prev_hunk() end)
             return "<Ignore>"
         end, {expr=true})
-
         wk.register({
             h = {
                 name = "GitSigns",
@@ -139,16 +142,19 @@ require("gitsigns").setup{
         }, { prefix = "<leader>"})
     end
 }
+require("barbar-setup")
 require("ranger-setup")
 require("trouble-setup")
 require("cmp-setup")
 require("lsp")
 require("toggle-term")
 require("fzf")
-require("barbar")
 require("tree")
 require("tests")
 require"nvim-treesitter.configs".setup {
+    context_commentstring = {
+        enable = true,
+    },
     highlight = {
         enable = true,
     },
@@ -170,7 +176,6 @@ require("fm-nvim").setup{
         },
     },
 }
-
 require("which-key").setup {}
 require"lualine".setup {
     sections = {
@@ -178,4 +183,4 @@ require"lualine".setup {
     }
 }
 require("luasnip.loaders.from_vscode").lazy_load()
-require"luasnip".filetype_extend("typescript", {"typescript", "javascript", "javascriptreact-ts"})
+
