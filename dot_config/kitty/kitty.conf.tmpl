@@ -1,7 +1,11 @@
-font_size 18
 font_family FiraCode Nerd Font
 
+{{ if eq .chezmoi.os "darwin" }}
+font_size 18
 macos_option_as_alt yes
+{{ else }}
+font_size 13
+{{ end }}
 
 enable_audio_bell no
 cursor_shape block
