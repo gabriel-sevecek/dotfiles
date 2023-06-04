@@ -57,7 +57,7 @@ end
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
-local servers = { "pyright", "tsserver", "elmls", "hls", "svelte", "clangd", "vuels", "prismals" }
+local servers = { "pyright", "tsserver", "elmls", "hls", "svelte", "clangd", "vuels", "prismals", "bashls" }
 local init_options = {
     tsserver = {
         preferences = {
