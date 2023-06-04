@@ -30,6 +30,8 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
+[ -f ~/.zshrc_work ] && source ~/.zshrc_work
+
 # aliases
 alias n="nvim"
 alias ls="ls --color"
@@ -82,14 +84,14 @@ autoload bashcompinit
 bashcompinit
 
 zinit snippet OMZ::plugins/docker/_docker
+zinit snippet OMZP::fzf
 zinit ice as"completion"
 zinit snippet https://git.zx2c4.com/password-store/plain/src/completion/pass.zsh-completion
 
-PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT="$HOME/.pyenv"
 if [ -d "$PYENV_ROOT" ]; then
     export PYENV_ROOT
     export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
 fi
 
@@ -106,6 +108,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 bindkey -e
 bindkey "\e[3~" delete-char
+bindkey \^J backward-kill-line
 
 function update() {
     updates=`checkupdates`
@@ -136,6 +139,9 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export WORDCHARS=""
 
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
 
 eval "$(direnv hook zsh)"
 
@@ -152,6 +158,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
-[ -f ~/.zshrc_work ] && source ~/.zshrc_work
-
-if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/nix.sh"; fi # added by Nix installer
+if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"; fi # added by Nix installer
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
