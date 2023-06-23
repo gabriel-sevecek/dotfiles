@@ -26,6 +26,7 @@
     b = branch
     p = pull
     r = rebase
+    fa = "!git ls-files -m -o --exclude-standard | fzf --bind ctrl-a:select-all --print0 -m | xargs -0 -t -o git add"
 [push]
 	default = simple
 [pull]
