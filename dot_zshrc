@@ -33,11 +33,11 @@ zinit light-mode for \
 [ -f ~/.zshrc_work ] && source ~/.zshrc_work
 
 # aliases
-alias n="nvim"
-alias ls="ls --color"
-alias mutt="neomutt"
-alias n="nvim"
-alias vim="nvim"
+alias n='nvim'
+alias ls='ls --color'
+alias mutt='neomutt'
+alias n='nvim'
+alias vim='nvim'
 alias srg='rg -g "*.scss"'
 alias grg='rg -g "*.graphql"'
 alias trg='rg -g "*.tsx" -g "*.ts"'
@@ -50,7 +50,8 @@ alias d='docker'
 alias g='git'
 alias h='fc -l 1'
 alias timestamp='date +%s%3N'
-alias s="kitty +kitten ssh"
+alias s='kitty +kitten ssh'
+alias ch='chezmoi'
 
 # history
 HISTFILE=~/.zsh_history
