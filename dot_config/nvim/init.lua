@@ -11,12 +11,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
-    "savq/paq-nvim";    
     { "junegunn/fzf", build=":call fzf#install()" };
     "junegunn/fzf.vim";
     "tpope/vim-fugitive";
     "myusuf3/numbers.vim";
-    "scrooloose/nerdcommenter";
+    { 'echasnovski/mini.comment', version = false },
     "machakann/vim-sandwich";
     "pangloss/vim-javascript";
     "HerringtonDarkholme/yats.vim";
@@ -90,16 +89,15 @@ vim.g.startify_bookmarks = {{
 }}
 
 vim.g.loaded_python3_provider = 0
-vim.g.loaded_node_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
+vim.g.node_host_prog = "/Users/g.sevecek/.nvm/versions/node/v14.21.2/bin/neovim-node-host"
 
-vim.g.NERDSpaceDelims = 1
 
 function highlight_on_yank()
     vim.highlight.on_yank { on_visual=false }
 end
-vim.api.nvim_create_autocmd("TextYankPost * silent!", { callback = highlight_on_yank })
+vim.api.nvim_create_autocmd("TextYankPost", { pattern = "*", callback = highlight_on_yank })
 
 vim.api.nvim_create_user_command("Format", function() vim.lsp.buf.format { async = true } end, {})
 vim.api.nvim_set_keymap("n", "]q", ":cnext<cr>", { noremap = true, silent = true })
@@ -167,18 +165,30 @@ require("barbar-setup")
 require("tree")
 require("tests")
 require"nvim-treesitter.configs".setup {
-    highlight = {
-        enable = true,
-    },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "<CR>",
-            scope_incremental = "<CR>",
-            node_incremental = "<TAB>",
-            node_decremental = "<S-TAB>",
+    -- ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "vue", "markdown", "markdown_inline" },
+    -- highlight = {
+    --     enable = true,
+    -- },
+    -- incremental_selection = {
+    --     enable = true,
+    --     keymaps = {
+    --         init_selection = "<CR>",
+    --         scope_incremental = "<CR>",
+    --         node_incremental = "<TAB>",
+    --         node_decremental = "<S-TAB>",
+    --     },
+    -- },
+    ensure_installed = "all", -- or a list of languages
+        highlight = {
+            enable = true, -- false will disable the whole extension
         },
-    },
+        indent = {
+            enable = true,
+        },
+        folding = {
+            enable = true -- enables folding
+        }
+
 };
 require"marks".setup {}
 require("fm-nvim").setup{
@@ -199,3 +209,4 @@ require("luasnip.loaders.from_vscode").lazy_load()
 require"luasnip".filetype_extend("typescript", {"typescript", "javascript", "javascriptreact-ts"})
 require("oil").setup {}
 require("oil-setup")
+require('mini.comment').setup()
