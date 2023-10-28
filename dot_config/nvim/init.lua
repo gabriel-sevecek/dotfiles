@@ -55,6 +55,7 @@ require("lazy").setup({
     "lewis6991/gitsigns.nvim";
     "rbong/vim-flog";
     "stevearc/oil.nvim";
+    "williamboman/mason.nvim";
 })
 
 require("impatient")
@@ -115,6 +116,7 @@ null_ls.setup({
         null_ls.builtins.formatting.pg_format,
         null_ls.builtins.formatting.jq,
         null_ls.builtins.formatting.nixpkgs_fmt,
+        null_ls.builtins.code_actions.eslint,
     },
 })
 
@@ -210,3 +212,4 @@ require"luasnip".filetype_extend("typescript", {"typescript", "javascript", "jav
 require("oil").setup {}
 require("oil-setup")
 require('mini.comment').setup()
+require("mason").setup()

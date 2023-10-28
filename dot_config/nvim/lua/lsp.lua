@@ -74,3 +74,22 @@ for _, lsp in ipairs(servers) do
       init_options = init_options[lsp] or {},
   }
 end
+
+nvim_lsp.eslint.setup({
+  capabilities = capabilities,
+  flags = { debounce_text_changes = 500 },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = true
+    if client.server_capabilities.documentFormattingProvider then
+      local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function()
+          vim.lsp.buf.format({ async = true })
+        end,
+        group = au_lsp,
+      })
+    end
+  end,
+})
+
