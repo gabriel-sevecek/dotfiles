@@ -12,20 +12,26 @@
   };
 
   outputs = { nixpkgs, home-manager, nixvim-config, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
     {
-      homeConfigurations."gabriel" = home-manager.lib.homeManagerConfiguration
-        {
-          inherit pkgs;
-          # Specify your home configuration modules here, for example,
-          # the path to your home.nix.
+      homeConfigurations = {
+        "gabriel@desktop" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [ ./home.nix ];
           extraSpecialArgs = {
-            nixvim = nixvim-config.packages.${system}.default; # Passing nixvim-config
+            nixvim = nixvim-config.packages."x86_64-linux".default;
+            username = "gabriel";
+            homeDirectory = "/home/gabriel";
           };
         };
+        "darwin" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+          modules = [ ./home.nix ];
+          extraSpecialArgs = {
+            nixvim = nixvim-config.packages.aarch64-darwin.default; # Passing nixvim-config
+            username = "g.sevecek";
+            homeDirectory = "/Users/g.sevecek";
+          };
+        };
+      };
     };
 }
