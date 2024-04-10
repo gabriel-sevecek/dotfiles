@@ -1,6 +1,11 @@
-{ config, pkgs, nixvim, username, homeDirectory, ... }:
-
 {
+  config,
+  pkgs,
+  nixvim,
+  username,
+  homeDirectory,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = username;
@@ -20,6 +25,8 @@
   home.packages = [
     nixvim
     pkgs.alejandra
+    pkgs.fd
+    pkgs.ripgrep
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -89,7 +96,7 @@
 
       zstyle ':completion:*' menu select
       zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-      '';
+    '';
     shellAliases = {
       n = "nvim";
       g = "git";
