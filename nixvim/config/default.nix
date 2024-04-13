@@ -8,6 +8,7 @@
     ./fzf-lua.nix
     ./ftplugin.nix
     ./conform-nvim.nix
+    ./yanky.nix
   ];
   config = {
     extraPlugins = [pkgs.vimPlugins.nightfox-nvim];
@@ -15,6 +16,13 @@
     plugins = {
       lualine.enable = true;
     };
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader><space>";
+        action = "<cmd>nohl<CR>";
+      }
+    ];
   };
   options = {
     mouse = "a";

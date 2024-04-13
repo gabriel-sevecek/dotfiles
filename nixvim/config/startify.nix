@@ -2,13 +2,13 @@
   plugins.startify = {
     enable = true;
     settings = {
-      bookmarks = [ 
+      bookmarks = [
         {
-	  i = "~/.config/nvim/init.lua";
-	}
+          n = "~/.config/home-manager/nixvim/flake.nix";
+        }
         {
-	  z = "~/.zshrc";
-	}
+          h = "~/.config/home-manager/flake.nix";
+        }
       ];
     };
   };

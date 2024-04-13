@@ -3,6 +3,10 @@
     enable = true;
     formattersByFt = {
       nix = ["alejandra"];
+      haskell = ["fourmolu"];
+      typescript = ["prettierd" "deno_fmt"];
+      javascript = ["prettierd" "deno_fmt"];
+      json = ["deno_fmt"];
     };
     formatOnSave = {
       lspFallback = true;
