@@ -9,6 +9,7 @@
     ./ftplugin.nix
     ./conform-nvim.nix
     ./yanky.nix
+    ./neogit.nix
   ];
   config = {
     extraPlugins = [pkgs.vimPlugins.nightfox-nvim];
