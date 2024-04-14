@@ -10,6 +10,7 @@
           h = "~/.config/home-manager/flake.nix";
         }
       ];
+      changeToDir = false;
     };
   };
 }
