@@ -17,6 +17,20 @@
     plugins = {
       lualine.enable = true;
     };
+    opts = {
+      mouse = "a";
+      tabstop = 4;
+      shiftwidth = 4;
+      softtabstop = 4;
+      expandtab = true;
+      number = true;
+      relativenumber = true;
+      ignorecase = true;
+      smartcase = true;
+      incsearch = true;
+      showmatch = true;
+      hlsearch = true;
+    };
     keymaps = [
       {
         mode = "n";
@@ -24,18 +38,5 @@
         action = "<cmd>nohl<CR>";
       }
     ];
-  };
-  options = {
-    mouse = "a";
-    tabstop = 4;
-    shiftwidth = 4;
-    softtabstop = 4;
-    expandtab = true;
-    number = true;
-    ignorecase = true;
-    smartcase = true;
-    incsearch = true;
-    showmatch = true;
-    hlsearch = true;
   };
 }
