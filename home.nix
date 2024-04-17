@@ -4,6 +4,8 @@
   nixvim,
   username,
   homeDirectory,
+  extraVariables,
+  extraPackages,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -22,29 +24,34 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    nixvim
-    alejandra
-    fd
-    ripgrep
-    prettierd
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
+  home.packages = with pkgs;
+    [
+      nixvim
+      alejandra
+      fd
+      ripgrep
+      prettierd
+      tmux
+      eza
+      pgcli
+      # # Adds the 'hello' command to your environment. It prints a friendly
+      # # "Hello, world!" when run.
+      # pkgs.hello
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+      # # It is sometimes useful to fine-tune packages, for example, by applying
+      # # overrides. You can do that directly here, just don't forget the
+      # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+      # # fonts?
+      # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
+      # # You can also create simple shell scripts directly inside your
+      # # configuration. For example, this adds a command 'my-hello' to your
+      # # environment:
+      # (pkgs.writeShellScriptBin "my-hello" ''
+      #   echo "Hello, ${config.home.username}!"
+      # '')
+    ]
+    ++ extraPackages;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -76,9 +83,11 @@
   #
   #  /etc/profiles/per-user/gabriel/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables =
+    {
+      EDITOR = "nvim";
+    }
+    // extraVariables;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -99,9 +108,11 @@
       zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
     '';
     shellAliases = {
+      vim = "nvim";
       n = "nvim";
       g = "git";
       d = "docker";
+      ls = "eza";
     };
     history = {
       size = 1000000;
@@ -162,9 +173,33 @@
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
+    nix-direnv.enable = true;
   };
   programs.z-lua = {
     enable = true;
     enableZshIntegration = true;
+  };
+  programs.git = {
+    enable = true;
+    aliases = {
+      lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+      l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -n 10";
+      dc = "diff --cached";
+      dh = "diff HEAD^!";
+      s = "status";
+      c = "commit";
+      d = "diff";
+      co = "checkout";
+      sw = "switch";
+      b = "branch";
+      p = "pull";
+      r = "rebase";
+    };
+    ignores = [
+      "shell.nix"
+      ".envrc"
+      ".env"
+      ".direnv"
+    ];
   };
 }

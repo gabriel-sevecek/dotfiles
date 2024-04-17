@@ -13,29 +13,54 @@
 
   outputs = {
     nixpkgs,
-    home-manager,
     nixvim-config,
+    home-manager,
     ...
   }: {
-    homeConfigurations = {
-      "gabriel@desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        modules = [./home.nix];
-        extraSpecialArgs = {
-          nixvim = nixvim-config.packages."x86_64-linux".default;
-          username = "gabriel";
-          homeDirectory = "/home/gabriel";
+    homeConfigurations = let
+      mkHomeConfiguration = {
+        system,
+        username,
+        homeDirectory,
+        extraModules ? [],
+        extraVariables ? {},
+        extraPackages ? [],
+      }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [
+            ./home.nix
+          ];
+          extraSpecialArgs = {
+            nixvim = nixvim-config.packages.${system}.default;
+            inherit username homeDirectory extraVariables extraPackages;
+          };
         };
+    in {
+      "gabriel@desktop" = mkHomeConfiguration {
+        system = "x86_64-linux";
+        username = "gabriel";
+        homeDirectory = "/home/gabriel";
       };
-      "darwin" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-        modules = [./home.nix];
-        extraSpecialArgs = {
-          nixvim = nixvim-config.packages.aarch64-darwin.default; # Passing nixvim-config
+      "g.sevecek" = let
+        system = "aarch64-darwin";
+        pkgs = nixpkgs.legacyPackages.${system};
+        yawsso = pkgs.python3Packages.buildPythonPackage rec {
+          pname = "yawsso";
+          version = "1.2.0";
+          src = pkgs.python3Packages.fetchPypi {
+            inherit pname version;
+            sha256 = "sha256-wzJk8WUpP3A4hIowedzSTQWb1rNcghKCzwBbcNK3f3E=";
+          };
+          doCheck = false;
+        };
+      in
+        mkHomeConfiguration {
+          system = system;
           username = "g.sevecek";
           homeDirectory = "/Users/g.sevecek";
+          extraPackages = [yawsso];
         };
-      };
     };
   };
 }
