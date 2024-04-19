@@ -16,6 +16,7 @@
     colorscheme = "nightfox";
     plugins = {
       lualine.enable = true;
+      undotree.enable = true;
     };
     opts = {
       mouse = "a";
@@ -30,6 +31,9 @@
       incsearch = true;
       showmatch = true;
       hlsearch = true;
+      undodir = "~/.local/share/nvim/undo";
+      undofile = true;
+      undolevels = 1000;
     };
     keymaps = [
       {
