@@ -31,7 +31,6 @@
       incsearch = true;
       showmatch = true;
       hlsearch = true;
-      undodir = "~/.local/share/nvim/undo";
       undofile = true;
       undolevels = 1000;
     };
