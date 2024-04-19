@@ -34,6 +34,8 @@
       tmux
       eza
       pgcli
+      nodejs_20
+      jq
       # # Adds the 'hello' command to your environment. It prints a friendly
       # # "Hello, world!" when run.
       # pkgs.hello
