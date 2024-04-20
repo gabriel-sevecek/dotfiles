@@ -315,11 +315,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-9+xaTEAh5Zvpk/HaF/uIL0yk8qcrhsTNBcJyiVsU+88=",
-        "path": "/nix/store/830qw36fcfykaaad49ls7b9p8c6wj8hy-source/nixvim",
+        "path": "/nix/store/j7nakfbbm54g1hdvhf8z1wbd3svp6kqf-source/nixvim",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/830qw36fcfykaaad49ls7b9p8c6wj8hy-source/nixvim",
+        "path": "/nix/store/j7nakfbbm54g1hdvhf8z1wbd3svp6kqf-source/nixvim",
         "type": "path"
       }
     },

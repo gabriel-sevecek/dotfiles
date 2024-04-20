@@ -184,6 +184,8 @@
   programs.git = {
     enable = true;
     delta.enable = true;
+    userName = "Gabriel Sevecek";
+    userEmail = "1851927+gabriel-sevecek@users.noreply.github.com";
     aliases = {
       lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
       l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -n 10";
