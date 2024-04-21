@@ -4,9 +4,9 @@
     formattersByFt = {
       nix = ["alejandra"];
       haskell = ["fourmolu"];
-      typescript = ["prettierd" "deno_fmt"];
-      javascript = ["prettierd" "deno_fmt"];
-      json = ["deno_fmt"];
+      typescript = ["prettierd"];
+      javascript = ["prettierd"];
+      json = ["jq"];
     };
     formatOnSave = {
       lspFallback = true;
