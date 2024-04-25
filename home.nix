@@ -36,6 +36,7 @@
       pgcli
       nodejs_20
       jq
+      pgformatter
       # # Adds the 'hello' command to your environment. It prints a friendly
       # # "Hello, world!" when run.
       # pkgs.hello

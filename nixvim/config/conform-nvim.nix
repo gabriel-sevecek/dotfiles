@@ -7,6 +7,7 @@
       typescript = ["prettierd"];
       javascript = ["prettierd"];
       json = ["jq"];
+      sql = ["pg_format"];
     };
     formatOnSave = {
       lspFallback = true;
