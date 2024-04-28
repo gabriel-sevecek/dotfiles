@@ -31,7 +31,6 @@
       fd
       ripgrep
       prettierd
-      tmux
       eza
       pgcli
       nodejs_20
@@ -207,5 +206,28 @@
       ".env"
       ".direnv"
     ];
+  };
+  programs.tmux = {
+    enable = true;
+    keyMode = "vi";
+    mouse = true;
+    escapeTime = 0;
+    terminal = "screen-256color";
+    extraConfig = ''
+      set-option -g renumber-windows on
+      set-option -sa terminal-features ',xterm-kitty:RGB'
+
+      set-option -g history-limit 30000
+      set-option -g focus-events on
+
+      bind-key 'h' 'select-pane -L'
+      bind-key 'j' 'select-pane -D'
+      bind-key 'k' 'select-pane -U'
+      bind-key 'l' 'select-pane -R'
+      bind-key 'W' 'last-window'
+
+      bind  %  split-window -h -c "#{pane_current_path}"
+      bind '"' split-window -v -c "#{pane_current_path}"
+    '';
   };
 }
