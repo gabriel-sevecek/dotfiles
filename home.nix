@@ -26,16 +26,18 @@
   # environment.
   home.packages = with pkgs;
     [
-      nixvim
       alejandra
-      fd
-      ripgrep
-      prettierd
+      black
       eza
-      pgcli
-      nodejs_20
+      fd
+      haskellPackages.fourmolu
       jq
+      nixvim
+      nodejs_20
+      pgcli
       pgformatter
+      prettierd
+      ripgrep
       # # Adds the 'hello' command to your environment. It prints a friendly
       # # "Hello, world!" when run.
       # pkgs.hello

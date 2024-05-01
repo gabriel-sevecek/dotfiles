@@ -2,12 +2,13 @@
   plugins.conform-nvim = {
     enable = true;
     formattersByFt = {
-      nix = ["alejandra"];
       haskell = ["fourmolu"];
-      typescript = ["prettierd"];
       javascript = ["prettierd"];
       json = ["jq"];
+      nix = ["alejandra"];
+      python = ["black"];
       sql = ["pg_format"];
+      typescript = ["prettierd"];
     };
     formatOnSave = {
       lspFallback = true;
