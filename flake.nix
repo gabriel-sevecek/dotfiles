@@ -4,7 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixvim-config.url = "./nixvim";
+    nixvim.url = "git+ssh://github.com/gabriel-sevecek/nixvim";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,7 +13,7 @@
 
   outputs = {
     nixpkgs,
-    nixvim-config,
+    nixvim,
     home-manager,
     ...
   }: {
@@ -32,7 +32,7 @@
             ./home.nix
           ];
           extraSpecialArgs = {
-            nixvim = nixvim-config.packages.${system}.default;
+            nixvim = nixvim.packages.${system}.default;
             inherit username homeDirectory extraVariables extraPackages;
           };
         };
