@@ -60,6 +60,9 @@
           username = "g.sevecek";
           homeDirectory = "/Users/g.sevecek";
           extraPackages = [yawsso];
+          extraVariables = {
+            PGGSSENCMODE = "disable";
+          };
         };
     };
   };
