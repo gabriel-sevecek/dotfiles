@@ -208,6 +208,9 @@
       ".env"
       ".direnv"
     ];
+    extraConfig = {
+      pull.rebase = true;
+    };
   };
   programs.tmux = {
     enable = true;
