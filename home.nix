@@ -217,6 +217,7 @@
     keyMode = "vi";
     mouse = true;
     escapeTime = 0;
+    shell = "${pkgs.zsh}/bin/zsh";
     terminal = "screen-256color";
     extraConfig = ''
       set-option -g renumber-windows on
