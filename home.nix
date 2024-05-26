@@ -219,6 +219,7 @@
     escapeTime = 0;
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "screen-256color";
+    baseIndex = 1;
     extraConfig = ''
       set-option -g renumber-windows on
       set-option -sa terminal-features ',xterm-kitty:RGB'
