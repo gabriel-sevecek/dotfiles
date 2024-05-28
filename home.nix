@@ -210,6 +210,7 @@
     ];
     extraConfig = {
       pull.rebase = true;
+      init.defaultBranch = "main";
     };
   };
   programs.tmux = {
