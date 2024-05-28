@@ -127,16 +127,6 @@
     '';
     plugins = [
       {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
-      {
-        name = "powerlevel10k-config";
-        src = ./.;
-        file = "p10k.zsh";
-      }
-      {
         name = "fzf-zsh-plugin";
         src = pkgs.fetchFromGitHub {
           owner = "unixorn";
@@ -173,6 +163,9 @@
         };
       }
     ];
+  };
+  programs.starship = {
+    enable = true;
   };
   programs.direnv = {
     enable = true;
