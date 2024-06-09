@@ -34,6 +34,7 @@
       jq
       nixvim
       nodejs_20
+      yarn
       pgcli
       pgformatter
       prettierd
