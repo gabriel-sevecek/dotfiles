@@ -6,6 +6,8 @@
   homeDirectory,
   extraVariables,
   extraPackages,
+  wezterm,
+  system,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -96,6 +98,134 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.wezterm = {
+    enable = true;
+    package = wezterm.packages.${system}.default;
+    enableZshIntegration = true;
+    colorSchemes = {
+      nordfox = {
+        foreground = "#cdcecf";
+        background = "#192330";
+        cursor_bg = "#cdcecf";
+        cursor_border = "#cdcecf";
+        cursor_fg = "#192330";
+        compose_cursor = "#f4a261";
+        selection_bg = "#2b3b51";
+        selection_fg = "#cdcecf";
+        scrollbar_thumb = "#71839b";
+        split = "#131a24";
+        visual_bell = "#cdcecf";
+        ansi = ["#393b44" "#c94f6d" "#81b29a" "#dbc074" "#719cd6" "#9d79d6" "#63cdcf" "#dfdfe0"];
+        brights = ["#575860" "#d16983" "#8ebaa4" "#e0c989" "#86abdc" "#baa1e2" "#7ad5d6" "#e4e4e5"];
+        # indexed = {
+        #   "16" = "#d67ad2"
+        #   "17" = "#f4a261"
+        # };
+        tab_bar = {
+          background = "#131a24";
+          inactive_tab_edge = "#131a24";
+          inactive_tab_edge_hover = "#212e3f";
+          active_tab = {
+            bg_color = "#71839b";
+            fg_color = "#192330";
+            intensity = "Normal";
+            italic = false;
+            strikethrough = false;
+            underline = "None";
+          };
+          inactive_tab = {
+            bg_color = "#212e3f";
+            fg_color = "#aeafb0";
+            intensity = "Normal";
+            italic = false;
+            strikethrough = false;
+            underline = "None";
+          };
+          inactive_tab_hover = {
+            bg_color = "#29394f";
+            fg_color = "#cdcecf";
+            intensity = "Normal";
+            italic = false;
+            strikethrough = false;
+            underline = "None";
+          };
+          new_tab = {
+            bg_color = "#192330";
+            fg_color = "#aeafb0";
+            intensity = "Normal";
+            italic = false;
+            strikethrough = false;
+            underline = "None";
+          };
+          new_tab_hover = {
+            bg_color = "#29394f";
+            fg_color = "#cdcecf";
+            intensity = "Normal";
+            italic = false;
+            strikethrough = false;
+            underline = "None";
+          };
+        };
+      };
+    };
+    extraConfig = ''
+      return {
+        color_scheme = "nordfox";
+        use_fancy_tab_bar = false;
+        font_size = 13;
+        ssh_domains = {
+          {
+            name = "freenix",
+            remote_address = "freenix",
+            username = "gabriel",
+          },
+        };
+        keys = {
+          {
+            key = "t",
+            mods = "CTRL",
+            action = wezterm.action.SpawnTab "CurrentPaneDomain"
+          },
+          {
+            key = '%',
+            mods = 'SHIFT|ALT',
+            action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+          },
+          {
+            key = '"',
+            mods = 'SHIFT|ALT',
+            action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+          },
+          {
+            key = "h",
+            mods = "ALT",
+            action = wezterm.action_callback(function(window, pane)
+                local tab = window:mux_window():active_tab()
+                if tab:get_pane_direction("Left") ~= nil then
+                  window:perform_action(wezterm.action.ActivatePaneDirection("Left"), pane)
+                else
+                  window:perform_action(wezterm.action.ActivateTabRelative(-1), pane)
+                end
+            end),
+          },
+          { key = "j", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Down") },
+          { key = "k", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Up") },
+          {
+            key = "l",
+            mods = "ALT",
+            action = wezterm.action_callback(function(window, pane)
+                local tab = window:mux_window():active_tab()
+                if tab:get_pane_direction("Right") ~= nil then
+                  window:perform_action(wezterm.action.ActivatePaneDirection("Right"), pane)
+                else
+                  window:perform_action(wezterm.action.ActivateTabRelative(1), pane)
+                end
+            end)
+          }
+        };
+      }
+    '';
+  };
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -179,7 +309,8 @@
   };
   programs.git = {
     enable = true;
-    delta.enable = true;
+    #delta.enable = true;
+    diff-so-fancy.enable = true;
     userName = "Gabriel Sevecek";
     userEmail = "1851927+gabriel-sevecek@users.noreply.github.com";
     aliases = {
@@ -207,6 +338,29 @@
       init.defaultBranch = "main";
     };
   };
+  # programs.zellij = {
+  #   enable = true;
+  #   enableZshIntegration = true;
+  #   settings = {
+  #     theme = "nightfox";
+  #     themes = {
+  #       # https://github.com/EdenEast/nightfox.nvim/blob/main/extra/zellij/nightfox.kdl
+  #       nightfox = {
+  #         bg = "#192330";
+  #         fg = "#cdcecf";
+  #         red = "#c94f6d";
+  #         green = "#81b29a";
+  #         blue = "#719cd6";
+  #         yellow = "#dbc074";
+  #         magenta = "#9d79d6";
+  #         orange = "#f4a261";
+  #         cyan = "#63cdcf";
+  #         black = "#29394f";
+  #         white = "#aeafb0";
+  #       };
+  #     };
+  #   };
+  # };
   programs.tmux = {
     enable = true;
     keyMode = "vi";
