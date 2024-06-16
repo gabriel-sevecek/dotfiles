@@ -39,7 +39,7 @@
           };
         };
     in {
-      "gabriel@desktop" = mkHomeConfiguration {
+      "gabriel" = mkHomeConfiguration {
         system = "x86_64-linux";
         username = "gabriel";
         homeDirectory = "/home/gabriel";
