@@ -180,6 +180,7 @@
             username = "gabriel",
           },
         };
+        hide_tab_bar_if_only_one_tab = true;
         keys = {
           {
             key = "t",
