@@ -281,11 +281,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1727160107,
-        "narHash": "sha256-F4H3WTi8NanxWjE8q6bCoyONtZkyNKyJlKfslZJ5QFI=",
+        "lastModified": 1727160853,
+        "narHash": "sha256-BRr4H97CdO4s/g4PYdGtO41NteVI3DWB8Xe7C1PP+qM=",
         "ref": "refs/heads/main",
-        "rev": "b6a5ad68ed5cde5a8563f891adf91e77848f2ff1",
-        "revCount": 17,
+        "rev": "6e442207e4050688c7d6196bb566a633a4ef52e4",
+        "revCount": 18,
         "type": "git",
         "url": "ssh://github.com/gabriel-sevecek/nixvim"
       },
