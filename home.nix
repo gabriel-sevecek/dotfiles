@@ -210,29 +210,6 @@
       init.defaultBranch = "main";
     };
   };
-  programs.zellij = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      theme = "nightfox";
-      themes = {
-        # https://github.com/EdenEast/nightfox.nvim/blob/main/extra/zellij/nightfox.kdl
-        nightfox = {
-          bg = "#192330";
-          fg = "#cdcecf";
-          red = "#c94f6d";
-          green = "#81b29a";
-          blue = "#719cd6";
-          yellow = "#dbc074";
-          magenta = "#9d79d6";
-          orange = "#f4a261";
-          cyan = "#63cdcf";
-          black = "#29394f";
-          white = "#aeafb0";
-        };
-      };
-    };
-  };
   programs.tmux = {
     enable = true;
     keyMode = "vi";
