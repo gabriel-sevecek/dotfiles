@@ -270,4 +270,22 @@
       # end of nightfox theme
     '';
   };
+  programs.kitty = {
+    enable = true;
+    shellIntegration = {
+      enableZshIntegration = true;
+      mode = "no-cursor";
+    };
+    themeFile = "Nightfox";
+    font = {
+      name = "JetBrainsMono Nerd Font Mono";
+      size = 18;
+    };
+    settings = {
+      enable_audio_bell = "no";
+      cursor_shape = "block";
+      scrollback_pager_history_size = 10000;
+      macos_option_as_alt = "yes";
+    };
+  };
 }
