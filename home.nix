@@ -279,7 +279,10 @@
     themeFile = "Nightfox";
     font = {
       name = "JetBrainsMono Nerd Font Mono";
-      size = 18;
+      size =
+        if system == "aarch64-darwin"
+        then 18
+        else 16;
     };
     settings = {
       enable_audio_bell = "no";
