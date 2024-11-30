@@ -290,5 +290,9 @@
       scrollback_pager_history_size = 10000;
       macos_option_as_alt = "yes";
     };
+    keybindings = {
+      "alt+shift+]" = "next_tab";
+      "alt+shift+[" = "previous_tab";
+    };
   };
 }
