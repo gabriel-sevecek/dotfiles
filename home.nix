@@ -120,6 +120,9 @@
       g = "git";
       d = "docker";
       ls = "eza";
+      ll = "eza -l";
+      la = "eza -la";
+      lm = "eza -l --sort=modified";
     };
     history = {
       size = 1000000;
