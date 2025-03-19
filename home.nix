@@ -123,6 +123,7 @@
       ll = "eza -l";
       la = "eza -la";
       lm = "eza -l --sort=modified";
+      yrg = "rg -g \"*.yml\" -g \"*.yaml\"";
     };
     history = {
       size = 1000000;
