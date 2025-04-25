@@ -119,6 +119,7 @@
       n = "nvim";
       g = "git";
       d = "docker";
+      op = "lsof -i -P -n";
       ls = "eza";
       ll = "eza -l";
       la = "eza -la";
