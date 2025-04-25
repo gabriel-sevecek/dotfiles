@@ -125,6 +125,8 @@
       la = "eza -la";
       lm = "eza -l --sort=modified";
       yrg = "rg -g \"*.yml\" -g \"*.yaml\"";
+      trg = "rg -g \"*.ts\"";
+      vrg = "rg -g \"*.vue\"";
     };
     history = {
       size = 1000000;
