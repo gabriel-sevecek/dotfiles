@@ -301,6 +301,7 @@
     keybindings = {
       "alt+shift+]" = "next_tab";
       "alt+shift+[" = "previous_tab";
+      "ctrl+shift+z" = "toggle_layout stack";
     };
   };
 }
