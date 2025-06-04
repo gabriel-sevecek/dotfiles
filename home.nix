@@ -132,7 +132,7 @@
       size = 1000000;
       save = 1000000;
     };
-    initExtra = ''
+    initContent = ''
       bindkey -e
       [[ ! $(command -v nix) && -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]] && source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
     '';
