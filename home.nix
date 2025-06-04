@@ -214,8 +214,9 @@
       ".direnv"
     ];
     extraConfig = {
-      pull.rebase = true;
       init.defaultBranch = "main";
+      pull.rebase = true;
+      push.autoSetupRemote = true;
     };
   };
   programs.tmux = {
