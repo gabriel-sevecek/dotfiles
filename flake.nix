@@ -47,11 +47,17 @@
         pkgs = nixpkgs.legacyPackages.${system};
         yawsso = pkgs.python3Packages.buildPythonPackage rec {
           pname = "yawsso";
-          version = "1.2.0";
-          src = pkgs.python3Packages.fetchPypi {
+          version = "1.2.1";
+          src = pkgs.fetchPypi {
             inherit pname version;
-            sha256 = "sha256-wzJk8WUpP3A4hIowedzSTQWb1rNcghKCzwBbcNK3f3E=";
+            hash = "sha256-kfG8re73yxoyYJtqpkG2VHk9lWjNTIl9gG8bDLwhmfI=";
           };
+          format = "pyproject";
+
+          nativeBuildInputs = with pkgs.python3Packages; [
+            setuptools
+            wheel
+          ];
           doCheck = false;
         };
       in
