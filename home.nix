@@ -304,6 +304,7 @@
       "alt+shift+]" = "next_tab";
       "alt+shift+[" = "previous_tab";
       "ctrl+shift+z" = "toggle_layout stack";
+      "f2" = "new_window_with_cwd";
     };
   };
 }
