@@ -116,6 +116,7 @@
     '';
     shellAliases = {
       vim = "nvim";
+      s = "kitten ssh";
       n = "nvim";
       g = "git";
       d = "docker";
