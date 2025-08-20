@@ -35,6 +35,7 @@
       jq
       nixvim
       nodejs_20
+      pnpm
       yarn
       pgcli
       pgformatter
