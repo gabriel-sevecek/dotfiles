@@ -287,6 +287,10 @@
       macos_option_as_alt = "yes";
     };
     keybindings = {
+      "ctrl+[" = "previous_window";
+      "ctrl+]" = "next_window";
+      "ctrl+shift+[" = "detach_window tab-left";
+      "ctrl+shift+]" = "detach_window tab-right";
       "alt+shift+]" = "next_tab";
       "alt+shift+[" = "previous_tab";
       "ctrl+shift+z" = "toggle_layout stack";
