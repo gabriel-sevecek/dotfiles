@@ -291,6 +291,7 @@
       "ctrl+]" = "next_window";
       "ctrl+shift+[" = "detach_window tab-left";
       "ctrl+shift+]" = "detach_window tab-right";
+      "ctrl+shift+d" = "detach_window new-tab";
       "alt+shift+]" = "next_tab";
       "alt+shift+[" = "previous_tab";
       "ctrl+shift+z" = "toggle_layout stack";
