@@ -44,6 +44,7 @@
       };
       "g.sevecek" = let
         system = "aarch64-darwin";
+        homeDirectory = "/Users/g.sevecek";
         pkgs = nixpkgs.legacyPackages.${system};
         yawsso = pkgs.python3Packages.buildPythonPackage rec {
           pname = "yawsso";
@@ -64,10 +65,11 @@
         mkHomeConfiguration {
           system = system;
           username = "g.sevecek";
-          homeDirectory = "/Users/g.sevecek";
+          homeDirectory = homeDirectory;
           extraPackages = [yawsso];
           extraVariables = {
             PGGSSENCMODE = "disable";
+            NPM_AUTH_TOKEN_GITLAB = builtins.readFile "${homeDirectory}/.npm_auth_token_gitlab";
           };
         };
     };
