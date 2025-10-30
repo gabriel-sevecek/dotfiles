@@ -66,7 +66,10 @@
           system = system;
           username = "g.sevecek";
           homeDirectory = homeDirectory;
-          extraPackages = [yawsso];
+          extraPackages = [
+            yawsso
+            pkgs.awscli2
+          ];
           extraVariables = {
             PGGSSENCMODE = "disable";
             NPM_AUTH_TOKEN_GITLAB = builtins.readFile "${homeDirectory}/.npm_auth_token_gitlab";
