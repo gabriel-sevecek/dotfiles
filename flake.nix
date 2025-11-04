@@ -72,7 +72,7 @@
           ];
           extraVariables = {
             PGGSSENCMODE = "disable";
-            NPM_AUTH_TOKEN_GITLAB = builtins.readFile "${homeDirectory}/.npm_auth_token_gitlab";
+            NPM_AUTH_TOKEN_GITLAB = nixpkgs.lib.strings.trim (builtins.readFile "${homeDirectory}/.npm_auth_token_gitlab");
           };
         };
     };
