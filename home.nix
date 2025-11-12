@@ -38,6 +38,7 @@
       pgcli
       pgformatter
       pnpm
+      podman
       podman-compose
       prettierd
       ripgrep
@@ -94,11 +95,12 @@
     #enableAutosuggestions = true;
     enableCompletion = true;
     completionInit = ''
-      autoload -Uz compinit
-      compinit
+      fpath+=(${pkgs.podman}/share/zsh/site-functions)
 
       zstyle ':completion:*' menu select
       zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+      autoload -U compinit
+      compinit
     '';
     shellAliases = {
       vim = "nvim";
