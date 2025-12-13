@@ -28,6 +28,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ./home.nix
+            ./modules/zsh.nix
             {
               home.username = username;
               home.homeDirectory = homeDirectory;
