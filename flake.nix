@@ -30,6 +30,7 @@
             ./home.nix
             ./modules/zsh.nix
             ./modules/git.nix
+            ./modules/kitty.nix
             {
               home.username = username;
               home.homeDirectory = homeDirectory;
