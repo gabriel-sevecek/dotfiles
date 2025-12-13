@@ -36,11 +36,18 @@
           };
         };
     in {
-      "gabriel" = mkHomeConfiguration {
+      "gabriel" = let
         system = "x86_64-linux";
-        username = "gabriel";
-        homeDirectory = "/home/gabriel";
-      };
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+        mkHomeConfiguration {
+          system = system;
+          username = "gabriel";
+          homeDirectory = "/home/gabriel";
+          extraPackages = [
+            pkgs.aider-chat
+          ];
+        };
       "g.sevecek" = let
         system = "aarch64-darwin";
         homeDirectory = "/Users/g.sevecek";
