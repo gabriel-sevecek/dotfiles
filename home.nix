@@ -2,18 +2,9 @@
   config,
   pkgs,
   nixvim,
-  username,
-  homeDirectory,
-  extraVariables,
-  extraPackages,
   system,
   ...
 }: {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = username;
-  home.homeDirectory = homeDirectory;
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -25,27 +16,25 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs;
-    [
-      alejandra
-      black
-      eza
-      fd
-      haskellPackages.fourmolu
-      jq
-      nixvim
-      nodejs_20
-      pgcli
-      pgformatter
-      pnpm
-      podman
-      podman-compose
-      prettierd
-      ripgrep
-      superhtml
-      yarn
-    ]
-    ++ extraPackages;
+  home.packages = with pkgs; [
+    alejandra
+    black
+    eza
+    fd
+    haskellPackages.fourmolu
+    jq
+    nixvim
+    nodejs_20
+    pgcli
+    pgformatter
+    pnpm
+    podman
+    podman-compose
+    prettierd
+    ripgrep
+    superhtml
+    yarn
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -77,11 +66,9 @@
   #
   #  /etc/profiles/per-user/gabriel/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables =
-    {
-      EDITOR = "nvim";
-    }
-    // extraVariables;
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

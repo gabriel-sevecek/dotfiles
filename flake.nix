@@ -29,10 +29,17 @@
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ./home.nix
+
+            {
+              home.username = username;
+              home.homeDirectory = homeDirectory;
+              home.packages = extraPackages;
+              home.sessionVariables = extraVariables;
+            }
           ];
           extraSpecialArgs = {
             nixvim = nixvim.packages.${system}.default;
-            inherit username homeDirectory extraVariables extraPackages system;
+            inherit system;
           };
         };
     in {
