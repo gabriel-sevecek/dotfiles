@@ -1,8 +1,7 @@
 {
-  description = "Home Manager configuration of gabriel";
+  description = "Home Manager configuration of Gabriel Sevecek";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixvim.url = "git+ssh://github.com/gabriel-sevecek/nixvim";
     home-manager = {
