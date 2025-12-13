@@ -29,6 +29,7 @@
           modules = [
             ./home.nix
             ./modules/zsh.nix
+            ./modules/git.nix
             {
               home.username = username;
               home.homeDirectory = homeDirectory;
