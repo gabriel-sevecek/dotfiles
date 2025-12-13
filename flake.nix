@@ -59,21 +59,7 @@
         system = "aarch64-darwin";
         homeDirectory = "/Users/g.sevecek";
         pkgs = nixpkgs.legacyPackages.${system};
-        yawsso = pkgs.python3Packages.buildPythonPackage rec {
-          pname = "yawsso";
-          version = "1.2.1";
-          src = pkgs.fetchPypi {
-            inherit pname version;
-            hash = "sha256-kfG8re73yxoyYJtqpkG2VHk9lWjNTIl9gG8bDLwhmfI=";
-          };
-          format = "pyproject";
-
-          nativeBuildInputs = with pkgs.python3Packages; [
-            setuptools
-            wheel
-          ];
-          doCheck = false;
-        };
+        yawsso = import ./pkgs/yawsso.nix {inherit pkgs;};
       in
         mkHomeConfiguration {
           system = system;
