@@ -21,15 +21,13 @@
         system,
         username,
         homeDirectory,
-        extraModules ? [],
-        extraVariables ? {},
-        extraPackages ? [],
+        extraPackages,
+        extraVariables,
       }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ./home.nix
-
             {
               home.username = username;
               home.homeDirectory = homeDirectory;
@@ -42,38 +40,32 @@
             inherit system;
           };
         };
-    in {
-      "gabriel" = let
-        system = "x86_64-linux";
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        mkHomeConfiguration {
-          system = system;
+      users = {
+        gabriel = {
+          system = "x86_64-linux";
           username = "gabriel";
           homeDirectory = "/home/gabriel";
-          extraPackages = [
-            pkgs.aider-chat
-          ];
+          extraPackages = [nixpkgs.legacyPackages."x86_64-linux".aider-chat];
+          extraVariables = {};
         };
-      "g.sevecek" = let
-        system = "aarch64-darwin";
-        homeDirectory = "/Users/g.sevecek";
-        pkgs = nixpkgs.legacyPackages.${system};
-        yawsso = import ./pkgs/yawsso.nix {inherit pkgs;};
-      in
-        mkHomeConfiguration {
-          system = system;
+        g_sevecek = {
+          system = "aarch64-darwin";
           username = "g.sevecek";
-          homeDirectory = homeDirectory;
+          homeDirectory = "/Users/g.sevecek";
           extraPackages = [
-            yawsso
-            pkgs.awscli2
+            import
+            ./pkgs/yawsso.nix
+            {inherit nixpkgs;}
+            nixpkgs.legacyPackages."aarch64-darwin".awscli2
           ];
           extraVariables = {
             PGGSSENCMODE = "disable";
-            NPM_AUTH_TOKEN_GITLAB = nixpkgs.lib.strings.trim (builtins.readFile "${homeDirectory}/.npm_auth_token_gitlab");
+            NPM_AUTH_TOKEN_GITLAB =
+              nixpkgs.lib.strings.trim (builtins.readFile "/Users/g.sevecek/.npm_auth_token_gitlab");
           };
         };
-    };
+      };
+    in
+      builtins.mapAttrs (_key: userAttrs: mkHomeConfiguration userAttrs) users;
   };
 }
