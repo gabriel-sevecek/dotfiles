@@ -198,66 +198,6 @@
       ".direnv"
     ];
   };
-  programs.tmux = {
-    enable = true;
-    keyMode = "vi";
-    mouse = true;
-    escapeTime = 0;
-    shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "screen-256color";
-    baseIndex = 1;
-    extraConfig = ''
-      set-option -g renumber-windows on
-      set-option -sa terminal-features ',xterm-kitty:RGB'
-
-      set-option -g history-limit 30000
-      set-option -g focus-events on
-
-      bind-key 'h' 'select-pane -L'
-      bind-key 'j' 'select-pane -D'
-      bind-key 'k' 'select-pane -U'
-      bind-key 'l' 'select-pane -R'
-      bind-key 'W' 'last-window'
-
-      bind  %  split-window -h -c "#{pane_current_path}"
-      bind '"' split-window -v -c "#{pane_current_path}"
-
-      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?\.?(view|n?vim?x?)(-wrapped)?(diff)?$'"
-
-      bind-key -n 'M-h' if-shell "$is_vim" 'send-keys M-h' { if -F '#{pane_at_left}' ''' 'select-pane -L' }
-      bind-key -n 'M-j' if-shell "$is_vim" 'send-keys M-j' { if -F '#{pane_at_bottom}' ''' 'select-pane -D' }
-      bind-key -n 'M-k' if-shell "$is_vim" 'send-keys M-k' { if -F '#{pane_at_top}' ''' 'select-pane -U' }
-      bind-key -n 'M-l' if-shell "$is_vim" 'send-keys M-l' { if -F '#{pane_at_right}' ''' 'select-pane -R' }
-
-      bind-key -T copy-mode-vi 'M-h' if -F '#{pane_at_left}' ''' 'select-pane -L'
-      bind-key -T copy-mode-vi 'M-j' if -F '#{pane_at_bottom}' ''' 'select-pane -D'
-      bind-key -T copy-mode-vi 'M-k' if -F '#{pane_at_top}' ''' 'select-pane -U'
-      bind-key -T copy-mode-vi 'M-l' if -F '#{pane_at_right}' ''' 'select-pane -R'
-
-      # Nightfox theme
-      # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nightfox/nightfox.tmux
-      set -g mode-style "fg=#131a24,bg=#aeafb0"
-      set -g message-style "fg=#131a24,bg=#aeafb0"
-      set -g message-command-style "fg=#131a24,bg=#aeafb0"
-      set -g pane-border-style "fg=#aeafb0"
-      set -g pane-active-border-style "fg=#719cd6"
-      set -g status "on"
-      set -g status-justify "left"
-      set -g status-style "fg=#aeafb0,bg=#131a24"
-      set -g status-left-length "100"
-      set -g status-right-length "100"
-      set -g status-left-style NONE
-      set -g status-right-style NONE
-      set -g status-left "#[fg=#131a24,bg=#719cd6,bold] #S #[fg=#719cd6,bg=#131a24,nobold,nounderscore,noitalics]"
-      set -g status-right "#[fg=#131a24,bg=#131a24,nobold,nounderscore,noitalics]#[fg=#719cd6,bg=#131a24] #{prefix_highlight} #[fg=#aeafb0,bg=#131a24,nobold,nounderscore,noitalics]#[fg=#131a24,bg=#aeafb0] %Y-%m-%d  %I:%M %p #[fg=#719cd6,bg=#aeafb0,nobold,nounderscore,noitalics]#[fg=#131a24,bg=#719cd6,bold] #h "
-      setw -g window-status-activity-style "underscore,fg=#71839b,bg=#131a24"
-      setw -g window-status-separator ""
-      setw -g window-status-style "NONE,fg=#71839b,bg=#131a24"
-      setw -g window-status-format "#[fg=#131a24,bg=#131a24,nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=#131a24,bg=#131a24,nobold,nounderscore,noitalics]"
-      setw -g window-status-current-format "#[fg=#131a24,bg=#aeafb0,nobold,nounderscore,noitalics]#[fg=#131a24,bg=#aeafb0,bold] #I  #W #F #[fg=#aeafb0,bg=#131a24,nobold,nounderscore,noitalics]"
-      # end of nightfox theme
-    '';
-  };
   programs.kitty = {
     enable = true;
     shellIntegration = {
