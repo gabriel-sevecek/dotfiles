@@ -1,8 +1,6 @@
 {
-  config,
   pkgs,
   nixvim,
-  system,
   ...
 }: {
   # This value determines the Home Manager release that your configuration is
