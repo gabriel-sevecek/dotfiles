@@ -270,7 +270,7 @@
     font = {
       name = "JetBrainsMono Nerd Font Mono";
       size =
-        if system == "aarch64-darwin"
+        if pkgs.stdenv.isDarwin
         then 18
         else 16;
     };
