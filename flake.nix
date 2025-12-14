@@ -51,7 +51,7 @@
           extraPackages = [nixpkgs.legacyPackages."x86_64-linux".aider-chat];
           extraVariables = {};
         };
-        g_sevecek = {
+        "g.sevecek" = {
           system = "aarch64-darwin";
           username = "g.sevecek";
           homeDirectory = "/Users/g.sevecek";
