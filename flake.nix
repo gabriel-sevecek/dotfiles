@@ -56,9 +56,7 @@
           username = "g.sevecek";
           homeDirectory = "/Users/g.sevecek";
           extraPackages = [
-            import
-            ./pkgs/yawsso.nix
-            {inherit nixpkgs;}
+            (nixpkgs.legacyPackages."aarch64-darwin".callPackage ./pkgs/yawsso.nix {})
             nixpkgs.legacyPackages."aarch64-darwin".awscli2
           ];
           extraVariables = {
