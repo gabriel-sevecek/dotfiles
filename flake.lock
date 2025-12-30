@@ -47,11 +47,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766553851,
-        "narHash": "sha256-hHKQhHkXxuPJwLkI8wdu826GLV5AcuW9/HVdc9eBnTU=",
+        "lastModified": 1767048910,
+        "narHash": "sha256-KLFTeA/xquN+F3XHLAXcserk0L0nijbhzuldxNDF1eE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7eca7f7081036a7b740090994c9ec543927f89a7",
+        "rev": "d99b4ca5debaa082c7d76015aa2b7f3fc7e8b5f7",
         "type": "github"
       },
       "original": {
@@ -62,11 +62,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1766651565,
-        "narHash": "sha256-QEhk0eXgyIqTpJ/ehZKg9IKS7EtlWxF3N7DXy42zPfU=",
+        "lastModified": 1766902085,
+        "narHash": "sha256-coBu0ONtFzlwwVBzmjacUQwj3G+lybcZ1oeNSQkgC0M=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
+        "rev": "c0b0e0fddf73fd517c3471e546c0df87a42d53f4",
         "type": "github"
       },
       "original": {
@@ -130,11 +130,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1766679283,
-        "narHash": "sha256-KLXttmuv7a5BHgnLvP7lyUGH+MSnZ6HW8F1esg1NrwA=",
+        "lastModified": 1766820215,
+        "narHash": "sha256-ywoWK7T+YWBJPOOFl0wO7vlVGL1luX887yX48qO5Dag=",
         "ref": "refs/heads/main",
-        "rev": "399e073e21b6b2d5e408b66aa65ac3b96e89c55f",
-        "revCount": 69,
+        "rev": "6d2d9b69770c5af1504949e66cf6c47f5eddfa11",
+        "revCount": 73,
         "type": "git",
         "url": "ssh://github.com/gabriel-sevecek/nixvim"
       },
